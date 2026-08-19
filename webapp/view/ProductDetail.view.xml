@@ -1,0 +1,107 @@
+<mvc:View
+  controllerName="de.web1.smartstock.controller.ProductDetail"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m">
+  <Page title="{/selectedProduct/name}" showNavButton="true" navButtonPress=".onBackToInventory">
+    <subHeader>
+      <Toolbar>
+        <Label text="Produktdetail · /product/:productId" />
+        <ToolbarSpacer />
+        <Button text="Dashboard" icon="sap-icon://business-objects-experience" press=".onNavDashboard" />
+        <Button text="Lager" icon="sap-icon://inventory" press=".onNavInventory" />
+        <Button text="Bestellungen" icon="sap-icon://cart-3" press=".onNavOrders" />
+        <Button text="Analyse" icon="sap-icon://business-objects-mobile" press=".onNavAnalytics" />
+      </Toolbar>
+    </subHeader>
+    <content>
+      <VBox class="smartPage">
+        <Panel class="heroPanel">
+          <content>
+            <HBox wrap="Wrap" justifyContent="SpaceBetween" alignItems="Center">
+              <VBox class="heroText">
+                <Label text="{/selectedProduct/id}" class="sectionEyebrow" />
+                <Title text="{/selectedProduct/name}" level="H1" />
+                <Text text="Detailansicht für ein betriebliches Objekt mit Statusbegründung, Verkaufsdaten und Beschaffungsempfehlung." />
+              </VBox>
+              <VBox class="decisionBox">
+                <ObjectStatus text="{/selectedProduct/riskPriorityText}" state="{/selectedProduct/riskPriorityState}" />
+                <Text text="{/selectedProduct/managementAction}" />
+                <Button text="Produkt bearbeiten" icon="sap-icon://edit" press=".onOpenProductEdit" />
+              </VBox>
+            </HBox>
+          </content>
+        </Panel>
+
+        <FlexBox wrap="Wrap">
+          <Panel headerText="Produktdaten" class="detailPanel">
+            <content>
+              <ObjectListItem title="{/selectedProduct/name}" intro="{/selectedProduct/category}" number="{/selectedProduct/priceText}" numberUnit="Preis">
+                <attributes>
+                  <ObjectAttribute title="Produkt-ID" text="{/selectedProduct/id}" />
+                  <ObjectAttribute title="Bestand" text="{/selectedProduct/stock}" />
+                  <ObjectAttribute title="Mindestbestand" text="{/selectedProduct/minStock}" />
+                  <ObjectAttribute title="Verkauft" text="{/selectedProduct/sold}" />
+                  <ObjectAttribute title="Verbrauch" text="{/selectedProduct/dailyDemandText}" />
+                </attributes>
+                <firstStatus>
+                  <ObjectStatus text="{/selectedProduct/statusText}" state="{/selectedProduct/statusState}" />
+                </firstStatus>
+              </ObjectListItem>
+            </content>
+          </Panel>
+
+          <Panel headerText="Managemententscheidung" class="detailPanel">
+            <content>
+              <VBox class="detailStack">
+                <Text text="{/selectedProduct/statusReason}" />
+                <ObjectStatus text="Prioritaetsgrund: {/selectedProduct/riskReasonText}" state="{/selectedProduct/riskPriorityState}" />
+                <ObjectStatus text="Reichweite: {/selectedProduct/stockoutText}" state="{/selectedProduct/stockoutState}" />
+                <ProgressIndicator percentValue="{/selectedProduct/stockRatio}" displayValue="{/selectedProduct/stockRatio}%" state="{/selectedProduct/statusState}" />
+                <ObjectNumber number="{/selectedProduct/recommendedOrderQuantity}" unit="empfohlene Bestellmenge" />
+                <Button text="Nachbestellung für dieses Produkt erstellen" type="Emphasized" enabled="{/selectedProduct/canOrder}" press=".onCreateReorderForSelectedProduct" />
+              </VBox>
+            </content>
+          </Panel>
+
+          <Panel headerText="Controlling" class="detailPanel">
+            <content>
+              <VBox class="detailStack">
+                <ObjectNumber number="{/selectedProduct/revenueText}" unit="Umsatz" />
+                <ObjectNumber number="{/selectedProduct/stockValueText}" unit="aktueller Warenwert" />
+                <Text text="Diese Kennzahlen unterstützen operative Beschaffung und Managemententscheidungen." />
+              </VBox>
+            </content>
+          </Panel>
+
+          <Panel headerText="Bestellhistorie" class="detailPanel">
+            <content>
+              <List items="{/selectedProductOrders}">
+                <ObjectListItem title="{id}" intro="{supplier}" number="{quantity}" numberUnit="Stück bestellt">
+                  <attributes>
+                    <ObjectAttribute title="Erstellt" text="{createdAtText}" />
+                    <ObjectAttribute title="Erwartet" text="{expectedAtText}" />
+                    <ObjectAttribute title="Wareneingang" text="{receivedQuantityText}" />
+                  </attributes>
+                  <firstStatus>
+                    <ObjectStatus text="{orderStatusText}" state="{orderStatusState}" />
+                  </firstStatus>
+                </ObjectListItem>
+              </List>
+            </content>
+          </Panel>
+        </FlexBox>
+
+        <Panel headerText="Prozesssicht" class="smartPanel">
+          <content>
+            <HBox wrap="Wrap" class="processSteps">
+              <ObjectStatus text="1. Bestand prüfen" state="None" />
+              <ObjectStatus text="2. Mindestbestand vergleichen" state="{/selectedProduct/statusState}" />
+              <ObjectStatus text="3. Bestellmenge ableiten" state="Warning" />
+              <ObjectStatus text="4. Wareneingang oder Storno dokumentieren" state="Success" />
+            </HBox>
+          </content>
+        </Panel>
+      </VBox>
+    </content>
+  </Page>
+</mvc:View>

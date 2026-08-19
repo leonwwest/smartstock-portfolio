@@ -1,0 +1,157 @@
+<mvc:View
+  controllerName="de.web1.smartstock.controller.Analytics"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m">
+  <Page title="Analyse">
+    <subHeader>
+      <Toolbar>
+        <Button text="Dashboard" icon="sap-icon://business-objects-experience" press=".onNavDashboard" />
+        <Button text="Lager" icon="sap-icon://inventory" press=".onNavInventory" />
+        <Button text="Bestellungen" icon="sap-icon://cart-3" press=".onNavOrders" />
+        <ToolbarSpacer />
+        <Button text="System" icon="sap-icon://sys-monitor" press=".onNavSystem" />
+      </Toolbar>
+    </subHeader>
+    <content>
+      <Panel class="smartPanel">
+        <headerToolbar>
+          <Toolbar>
+            <VBox>
+              <Label text="Analyse · /analytics" class="sectionEyebrow" />
+              <Title text="Analyse" level="H2" />
+            </VBox>
+          </Toolbar>
+        </headerToolbar>
+        <content>
+          <FlexBox wrap="Wrap">
+            <GenericTile header="Kritischer Warenwert" subheader="Bestand mit Risiko" frameType="TwoByOne" class="smartTile">
+              <tileContent><TileContent><content><ObjectNumber number="{/metrics/riskStockValueText}" /></content></TileContent></tileContent>
+            </GenericTile>
+            <GenericTile header="Empfohlener Bestellwert" subheader="offene Vorschläge" frameType="TwoByOne" class="smartTile">
+              <tileContent><TileContent><content><ObjectNumber number="{/metrics/recommendedOrderValueText}" /></content></TileContent></tileContent>
+            </GenericTile>
+            <GenericTile header="Kritisch" subheader="Produkte" frameType="TwoByOne" class="smartTile">
+              <tileContent><TileContent><content><ObjectNumber number="{/metrics/critical}" /></content></TileContent></tileContent>
+            </GenericTile>
+            <GenericTile header="Nachbestellen" subheader="Produkte" frameType="TwoByOne" class="smartTile">
+              <tileContent><TileContent><content><ObjectNumber number="{/metrics/reorder}" /></content></TileContent></tileContent>
+            </GenericTile>
+            <GenericTile header="Unter 3 Tage" subheader="Reichweite" frameType="TwoByOne" class="smartTile">
+              <tileContent><TileContent><content><ObjectNumber number="{/metrics/shortRange}" /></content></TileContent></tileContent>
+            </GenericTile>
+          </FlexBox>
+
+          <FlexBox wrap="Wrap">
+            <Panel headerText="Umsatz pro Kategorie" class="analysisPanel chartPanel">
+              <content>
+                <List items="{/categoryRevenue}">
+                  <CustomListItem>
+                    <VBox class="chartItem">
+                      <HBox justifyContent="SpaceBetween">
+                        <Text text="{category}" />
+                        <Text text="{valueText}" />
+                      </HBox>
+                      <ProgressIndicator percentValue="{percentage}" displayValue="{percentage}%" state="None" />
+                    </VBox>
+                  </CustomListItem>
+                </List>
+              </content>
+            </Panel>
+            <Panel headerText="Beschaffungsrisiko pro Kategorie" class="analysisPanel chartPanel">
+              <content>
+                <List items="{/categoryRisk}">
+                  <CustomListItem>
+                    <VBox class="chartItem">
+                      <HBox justifyContent="SpaceBetween" wrap="Wrap">
+                        <VBox>
+                          <ObjectIdentifier title="{category}" text="{summary}" />
+                          <Text text="Fehlmenge: {missingQuantity} Stück" />
+                          <Text text="Kapitalbindung: {stockValueText}" />
+                        </VBox>
+                        <ObjectStatus text="{orderValueText}" state="{riskState}" />
+                      </HBox>
+                      <ProgressIndicator percentValue="{riskScore}" displayValue="{riskScore}% Risiko" state="{riskState}" />
+                    </VBox>
+                  </CustomListItem>
+                </List>
+              </content>
+            </Panel>
+            <Panel headerText="Top-Produkte nach Verbrauch" class="analysisPanel chartPanel">
+              <content>
+                <List items="{/topProducts}">
+                  <CustomListItem>
+                    <VBox class="chartItem">
+                      <HBox justifyContent="SpaceBetween">
+                        <Text text="{name}" />
+                        <Text text="{sold} verkauft" />
+                      </HBox>
+                      <ProgressIndicator percentValue="{soldPercentage}" displayValue="{sold}" state="Success" />
+                    </VBox>
+                  </CustomListItem>
+                </List>
+              </content>
+            </Panel>
+            <Panel headerText="Top-Produkte nach Umsatz" class="analysisPanel chartPanel">
+              <content>
+                <List items="{/topRevenueProducts}">
+                  <CustomListItem>
+                    <VBox class="chartItem">
+                      <HBox justifyContent="SpaceBetween">
+                        <ObjectIdentifier title="{name}" text="{id}" />
+                        <Text text="{revenueText}" />
+                      </HBox>
+                      <ProgressIndicator percentValue="{percentage}" displayValue="{percentage}%" state="None" />
+                    </VBox>
+                  </CustomListItem>
+                </List>
+              </content>
+            </Panel>
+          </FlexBox>
+
+          <FlexBox wrap="Wrap">
+            <Panel headerText="Bestand gegen Mindestbestand" class="analysisPanel">
+              <content>
+                <List items="{/products}">
+                  <CustomListItem>
+                    <VBox class="chartItem">
+                      <HBox justifyContent="SpaceBetween">
+                        <Text text="{name}" />
+                        <Text text="{stock}/{minStock}" />
+                      </HBox>
+                      <ProgressIndicator percentValue="{stockRatio}" displayValue="{stockRatio}%" state="{statusState}" />
+                    </VBox>
+                  </CustomListItem>
+                </List>
+              </content>
+            </Panel>
+            <Panel headerText="Tage bis Ausverkauf" class="analysisPanel">
+              <content>
+                <List items="{/forecastProducts}">
+                  <CustomListItem>
+                    <VBox class="chartItem">
+                      <HBox justifyContent="SpaceBetween">
+                        <ObjectIdentifier title="{name}" text="{id}" />
+                        <ObjectStatus text="{stockoutText}" state="{stockoutState}" />
+                      </HBox>
+                      <Text text="Verbrauch: {dailyDemandText}" />
+                      <Text text="{managementAction}" />
+                    </VBox>
+                  </CustomListItem>
+                </List>
+              </content>
+            </Panel>
+            <Panel headerText="Managemententscheidung" class="analysisPanel">
+              <content>
+                <VBox class="detailStack">
+                  <ObjectStatus text="{/analyticsDecision/title}" state="{/analyticsDecision/state}" />
+                  <Text text="{/analyticsDecision/text}" />
+                  <Text text="Die Kennzahlen verbinden Lagerbestand, Mindestbestand, offene Bestellungen und Bestellwert zu einer Beschaffungsentscheidung." />
+                </VBox>
+              </content>
+            </Panel>
+          </FlexBox>
+        </content>
+      </Panel>
+    </content>
+  </Page>
+</mvc:View>

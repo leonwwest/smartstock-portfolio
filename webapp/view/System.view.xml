@@ -1,0 +1,95 @@
+<mvc:View
+  controllerName="de.web1.smartstock.controller.System"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core">
+  <Page title="Architektur und Kursbezug">
+    <subHeader>
+      <Toolbar>
+        <Button text="Dashboard" icon="sap-icon://business-objects-experience" press=".onNavDashboard" />
+        <Button text="Lager" icon="sap-icon://inventory" press=".onNavInventory" />
+        <Button text="Bestellungen" icon="sap-icon://cart-3" press=".onNavOrders" />
+        <Button text="Analyse" icon="sap-icon://business-objects-mobile" press=".onNavAnalytics" />
+        <ToolbarSpacer />
+        <Button text="Demo-Daten zuruecksetzen" icon="sap-icon://reset" press=".onResetDemoData" />
+      </Toolbar>
+    </subHeader>
+    <content>
+      <VBox class="smartPage">
+        <Panel class="heroPanel">
+          <content>
+            <HBox wrap="Wrap" justifyContent="SpaceBetween" alignItems="Center">
+              <VBox class="heroText">
+                <Label text="Systemseite - /system" class="sectionEyebrow" />
+                <Title text="Architektur, Kursbezug und Mock-OData in einer App" level="H1" />
+                <Text text="Diese Ansicht macht sichtbar, welche Web1-Inhalte technisch umgesetzt wurden und wo SmartStock bewusst lokal bleibt." />
+              </VBox>
+              <VBox class="decisionBox">
+                <ObjectStatus text="OpenUI5 Business-Prototyp" state="None" />
+                <Text text="Component, Manifest, Routing, XML Views, JSONModel, Controller, Mock-OData und Fiori-nahe Oberflaeche sind direkt im Prototyp nachvollziehbar." />
+              </VBox>
+            </HBox>
+          </content>
+        </Panel>
+
+        <FlexBox wrap="Wrap">
+          <Panel headerText="Architektur" class="systemPanel">
+            <content>
+              <List>
+                <StandardListItem title="Component und Manifest" description="Component.js initialisiert Model und Router; manifest.json definiert App, Dependencies, Routes und Targets." />
+                <StandardListItem title="Routing" description="Dashboard, Lager, Bestellungen, Analyse, System und Produktdetail sind eigene Hash-Routen." />
+                <StandardListItem title="JSONModel" description="Produkte, Bestellungen, Filter, KPIs, Risiko und Produktdetail werden in einem zentralen JSONModel gebunden." />
+                <StandardListItem title="BaseController" description="Gemeinsame Prozesslogik fuer Filter, Nachbestellung, Wareneingang, Storno, Reset und Produktbearbeitung." />
+              </List>
+            </content>
+          </Panel>
+
+          <Panel headerText="Kursbezug" class="systemPanel">
+            <content>
+              <List>
+                <StandardListItem title="Exercise 10 - HTML5/CSS/JavaScript" description="index.html, Styling, Events, Dialoge, CSV-Export und localStorage-Demo-State." />
+                <StandardListItem title="Exercise 11 - SAPUI5/OpenUI5" description="XML Views, Controller, Routing, Data Binding, Component und Manifest." />
+                <StandardListItem title="Exercise 12 - OData Gateway" description="metadata.xml, ProductSet, OrderSet, Association, $count, $select und $expand als Mock." />
+                <StandardListItem title="Exercise 13 - Fiori" description="KPI-Kacheln, klare Navigation, Rollenbezug, Statusfarben und responsive Controls." />
+                <StandardListItem title="Exercise 14 - Analytical App" description="Umsatz, Reichweite, Risiko, Top-Produkte, Bestellwert und Managemententscheidung." />
+              </List>
+            </content>
+          </Panel>
+        </FlexBox>
+
+        <Panel headerText="Mock-Service Vorschau" class="smartPanel">
+          <content>
+            <HBox wrap="Wrap" class="mockExplorer">
+              <VBox class="mockControls">
+                <Label text="OData-nahes Beispiel" />
+                <Select selectedKey="{mock>/selectedKey}" change=".onMockExampleChange" width="18rem">
+                  <items>
+                    <core:Item key="products" text="ProductSet" />
+                    <core:Item key="orders" text="OrderSet" />
+                    <core:Item key="count" text="$count" />
+                    <core:Item key="select" text="$select" />
+                    <core:Item key="expand" text="$expand" />
+                  </items>
+                </Select>
+                <ObjectStatus text="{mock>/title}" state="None" />
+                <Text text="{mock>/description}" />
+                <Text text="{mock>/request}" class="codeLine" />
+              </VBox>
+              <TextArea value="{mock>/resultText}" editable="false" growing="true" growingMaxLines="18" width="100%" class="mockResult" />
+            </HBox>
+          </content>
+        </Panel>
+
+        <Panel headerText="Bewusste Abgrenzung" class="smartPanel">
+          <content>
+            <FlexBox wrap="Wrap" class="systemList">
+              <StandardListItem title="OpenUI5 statt SAPUI5" description="Freie UI5-Variante mit gleichem Architekturmodell, passend fuer eine lokale Kursdemo." />
+              <StandardListItem title="Mock statt Gateway" description="OData-Konzepte werden sichtbar simuliert, ohne ein produktives SAP Gateway vorzutaueschen." />
+              <StandardListItem title="Lokal statt Launchpad" description="Die App laeuft lokal, enthaelt aber Manifest-Metadaten und eine klare Launchpad-Idee." />
+            </FlexBox>
+          </content>
+        </Panel>
+      </VBox>
+    </content>
+  </Page>
+</mvc:View>

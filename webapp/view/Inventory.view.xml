@@ -1,0 +1,90 @@
+<mvc:View
+  controllerName="de.web1.smartstock.controller.Inventory"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core">
+  <Page title="Lager">
+    <subHeader>
+      <Toolbar>
+        <Button text="Dashboard" icon="sap-icon://business-objects-experience" press=".onNavDashboard" />
+        <ToolbarSpacer />
+        <Button text="Bestellungen" icon="sap-icon://cart-3" press=".onNavOrders" />
+        <Button text="Analyse" icon="sap-icon://business-objects-mobile" press=".onNavAnalytics" />
+        <Button text="System" icon="sap-icon://sys-monitor" press=".onNavSystem" />
+      </Toolbar>
+    </subHeader>
+    <content>
+      <Panel class="smartPanel">
+        <headerToolbar>
+          <Toolbar>
+            <VBox>
+              <Label text="Lagerliste · /inventory" class="sectionEyebrow" />
+              <Title text="Produkt- und Lagerübersicht" level="H2" />
+            </VBox>
+          </Toolbar>
+        </headerToolbar>
+        <content>
+          <HBox wrap="Wrap" class="filterBar">
+            <VBox class="filterField">
+              <Label text="Suche" />
+              <Input width="18rem" placeholder="Produkt, Kategorie oder ID" value="{/filters/query}" liveChange=".onSearch" />
+            </VBox>
+            <VBox class="filterField">
+              <Label text="Status" />
+              <Select width="14rem" selectedKey="{/filters/status}" change=".onStatusChange">
+                <items>
+                  <core:Item key="all" text="Alle" />
+                  <core:Item key="critical" text="Kritisch" />
+                  <core:Item key="reorder" text="Nachbestellen" />
+                  <core:Item key="ok" text="OK" />
+                </items>
+              </Select>
+            </VBox>
+            <VBox class="filterField">
+              <Label text="Kategorie" />
+              <ComboBox width="14rem" selectedKey="{/filters/category}" selectionChange=".onCategoryChange" items="{/categories}">
+                <core:ListItem key="{key}" text="{text}" />
+              </ComboBox>
+            </VBox>
+          </HBox>
+          <Table items="{/filteredProducts}" mode="SingleSelectMaster" itemPress=".onProductPress" autoPopinMode="true">
+            <columns>
+              <Column importance="High"><Text text="Produkt" /></Column>
+              <Column importance="Medium"><Text text="Kategorie" /></Column>
+              <Column importance="High"><Text text="Bestand" /></Column>
+              <Column importance="Medium"><Text text="Mindestbestand" /></Column>
+              <Column importance="Low"><Text text="Preis" /></Column>
+              <Column importance="Low"><Text text="Verkauft" /></Column>
+              <Column importance="Medium"><Text text="Reichweite" /></Column>
+              <Column importance="High"><Text text="Prioritaet" /></Column>
+              <Column importance="Low"><Text text="Grund" /></Column>
+              <Column importance="High"><Text text="Aktion" /></Column>
+              <Column importance="Medium"><Text text="Bearbeiten" /></Column>
+            </columns>
+            <items>
+              <ColumnListItem type="Navigation" press=".onProductPress">
+                <cells>
+                  <ObjectIdentifier title="{name}" text="{id}" titleActive="true" titlePress=".onProductPress" />
+                  <Text text="{category}" />
+                  <HBox alignItems="Center">
+                    <Button icon="sap-icon://less" type="Transparent" press=".onDecreaseStock" />
+                    <ObjectNumber number="{stock}" class="stockNumber" />
+                    <Button icon="sap-icon://add" type="Transparent" press=".onIncreaseStock" />
+                  </HBox>
+                  <Text text="{minStock}" />
+                  <Text text="{priceText}" />
+                  <Text text="{sold}" />
+                  <ObjectStatus text="{stockoutText}" state="{stockoutState}" />
+                  <ObjectStatus text="{riskPriorityText}" state="{riskPriorityState}" />
+                  <Text text="{riskReasonText}" />
+                  <Button text="Bestellen" type="Emphasized" enabled="{canOrder}" press=".onCreateReorder" />
+                  <Button icon="sap-icon://edit" tooltip="Produkt bearbeiten" press=".onOpenProductEdit" />
+                </cells>
+              </ColumnListItem>
+            </items>
+          </Table>
+        </content>
+      </Panel>
+    </content>
+  </Page>
+</mvc:View>

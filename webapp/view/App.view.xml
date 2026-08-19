@@ -1,0 +1,8 @@
+<mvc:View
+  controllerName="de.web1.smartstock.controller.App"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m">
+  <Shell appWidthLimited="false">
+    <App id="app" />
+  </Shell>
+</mvc:View>

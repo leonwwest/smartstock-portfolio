@@ -1,0 +1,10 @@
+[
+  { "OrderID": "B-9001", "ProductID": "P-1002", "ProductName": "Milch", "Quantity": 48, "Status": "offen", "CreatedAt": "2026-05-17T00:00:00", "ExpectedAt": "2026-05-18T00:00:00", "Supplier": "Molkerei Campus GmbH" },
+  { "OrderID": "B-9002", "ProductID": "P-1007", "ProductName": "Servietten", "Quantity": 160, "Status": "offen", "CreatedAt": "2026-05-17T00:00:00", "ExpectedAt": "2026-05-21T00:00:00", "Supplier": "Gastrobedarf Weber" },
+  { "OrderID": "B-9003", "ProductID": "P-1011", "ProductName": "Muffins Blaubeere", "Quantity": 48, "Status": "offen", "CreatedAt": "2026-05-18T00:00:00", "ExpectedAt": "2026-05-19T00:00:00", "Supplier": "Bäckerei Campus" },
+  { "OrderID": "B-9004", "ProductID": "P-1017", "ProductName": "Rührstäbchen Holz", "Quantity": 240, "Status": "offen", "CreatedAt": "2026-05-18T00:00:00", "ExpectedAt": "2026-05-19T00:00:00", "Supplier": "Gastrobedarf Weber" },
+  { "OrderID": "B-9005", "ProductID": "P-1019", "ProductName": "Papiertüten", "Quantity": 180, "Status": "offen", "CreatedAt": "2026-05-18T00:00:00", "ExpectedAt": "2026-05-22T00:00:00", "Supplier": "Pack & Go GmbH" },
+  { "OrderID": "B-9006", "ProductID": "P-1022", "ProductName": "Einmalhandschuhe", "Quantity": 24, "Status": "offen", "CreatedAt": "2026-05-18T00:00:00", "ExpectedAt": "2026-05-19T00:00:00", "Supplier": "Hygiene Nord" },
+  { "OrderID": "B-9007", "ProductID": "P-1009", "ProductName": "Haferdrink", "Quantity": 40, "Status": "offen", "CreatedAt": "2026-05-18T00:00:00", "ExpectedAt": "2026-05-21T00:00:00", "Supplier": "BioKontor Mitte" },
+  { "OrderID": "B-9008", "ProductID": "P-1015", "ProductName": "Müsliriegel", "Quantity": 80, "Status": "offen", "CreatedAt": "2026-05-18T00:00:00", "ExpectedAt": "2026-05-22T00:00:00", "Supplier": "Snackwerk GmbH" }
+]

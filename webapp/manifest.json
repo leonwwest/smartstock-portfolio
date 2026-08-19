@@ -1,0 +1,144 @@
+{
+  "_version": "1.65.0",
+  "sap.app": {
+    "id": "de.web1.smartstock",
+    "type": "application",
+    "title": "SmartStock",
+    "description": "OpenUI5 Lagercockpit zur Lagerüberwachung und Bestellunterstützung",
+    "applicationVersion": {
+      "version": "0.3.0"
+    },
+    "ach": "WEB1",
+    "dataSources": {
+      "mockOData": {
+        "uri": "localService/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "2.0",
+          "localUri": "localService/metadata.xml"
+        }
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "SmartStock-display": {
+          "semanticObject": "SmartStock",
+          "action": "display",
+          "title": "SmartStock",
+          "subTitle": "Lagercockpit",
+          "icon": "sap-icon://inventory"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "dependencies": {
+      "minUI5Version": "1.120.0",
+      "libs": {
+        "sap.m": {},
+        "sap.f": {},
+        "sap.ui.layout": {}
+      }
+    },
+    "models": {
+      "": {
+        "type": "sap.ui.model.json.JSONModel"
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "type": "View",
+        "viewType": "XML",
+        "path": "de.web1.smartstock.view",
+        "controlId": "app",
+        "controlAggregation": "pages",
+        "async": true
+      },
+      "routes": [
+        {
+          "pattern": "",
+          "name": "home",
+          "target": "dashboard"
+        },
+        {
+          "pattern": "dashboard",
+          "name": "dashboard",
+          "target": "dashboard"
+        },
+        {
+          "pattern": "inventory",
+          "name": "inventory",
+          "target": "inventory"
+        },
+        {
+          "pattern": "orders",
+          "name": "orders",
+          "target": "orders"
+        },
+        {
+          "pattern": "analytics",
+          "name": "analytics",
+          "target": "analytics"
+        },
+        {
+          "pattern": "system",
+          "name": "system",
+          "target": "system"
+        },
+        {
+          "pattern": "product/{productId}",
+          "name": "product",
+          "target": "productDetail"
+        }
+      ],
+      "targets": {
+        "dashboard": {
+          "id": "dashboard",
+          "name": "Dashboard"
+        },
+        "inventory": {
+          "id": "inventory",
+          "name": "Inventory"
+        },
+        "orders": {
+          "id": "orders",
+          "name": "Orders"
+        },
+        "analytics": {
+          "id": "analytics",
+          "name": "Analytics"
+        },
+        "system": {
+          "id": "system",
+          "name": "System"
+        },
+        "productDetail": {
+          "id": "productDetail",
+          "name": "ProductDetail"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "de.web1.smartstock.view.App",
+      "type": "XML",
+      "id": "appRoot",
+      "async": true
+    }
+  }
+}

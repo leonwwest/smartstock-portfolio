@@ -1,0 +1,118 @@
+<mvc:View
+  controllerName="de.web1.smartstock.controller.Dashboard"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core">
+  <Page title="SmartStock">
+    <subHeader>
+      <Toolbar>
+        <Label text="Dashboard · /dashboard" />
+        <ToolbarSpacer />
+        <Button text="Lager" icon="sap-icon://inventory" press=".onNavInventory" />
+        <Button text="Bestellungen" icon="sap-icon://cart-3" press=".onNavOrders" />
+        <Button text="Analyse" icon="sap-icon://business-objects-mobile" press=".onNavAnalytics" />
+        <Button text="System" icon="sap-icon://sys-monitor" press=".onNavSystem" />
+        <Button text="Demo-Daten zuruecksetzen" icon="sap-icon://reset" press=".onResetDemoData" />
+      </Toolbar>
+    </subHeader>
+    <content>
+      <VBox class="smartPage">
+        <Panel class="heroPanel">
+          <content>
+            <HBox wrap="Wrap" justifyContent="SpaceBetween" alignItems="Center">
+              <VBox class="heroText">
+                <Label text="Uni-Café Lagercockpit" class="sectionEyebrow" />
+                <Title text="Bestand, Umsatz und Nachbestellungen als OpenUI5 Business-App" level="H1" />
+                <Text text="Demo-Story: kritischen Bestand erkennen, Nachbestellung anlegen, Wareneingang buchen und KPI-Verbesserung sehen." />
+              </VBox>
+              <VBox class="decisionBox">
+                <ObjectStatus text="{/decision/title}" state="{/decision/state}" />
+                <Text text="{/decision/text}" />
+              </VBox>
+            </HBox>
+          </content>
+        </Panel>
+        <Panel class="smartPanel">
+          <headerToolbar>
+            <Toolbar>
+              <VBox>
+                <Label text="Kennzahlen" class="sectionEyebrow" />
+                <Title text="Dashboard" level="H2" />
+              </VBox>
+            </Toolbar>
+          </headerToolbar>
+          <content>
+            <FlexBox wrap="Wrap">
+              <GenericTile header="Gesamtumsatz" subheader="Vertrieb" frameType="TwoByOne" class="smartTile" press=".onDashboardTilePress">
+                <customData><core:CustomData key="target" value="analytics" /></customData>
+                <tileContent><TileContent><content><ObjectNumber number="{/metrics/revenueText}" /></content></TileContent></tileContent>
+              </GenericTile>
+              <GenericTile header="Warenwert" subheader="Lager" frameType="TwoByOne" class="smartTile" press=".onDashboardTilePress">
+                <customData><core:CustomData key="target" value="inventory" /></customData>
+                <tileContent><TileContent><content><ObjectNumber number="{/metrics/stockValueText}" /></content></TileContent></tileContent>
+              </GenericTile>
+              <GenericTile header="Produkte" subheader="Stammdaten" frameType="TwoByOne" class="smartTile" press=".onDashboardTilePress">
+                <customData><core:CustomData key="target" value="inventory" /></customData>
+                <tileContent><TileContent><content><ObjectNumber number="{/metrics/productCount}" /></content></TileContent></tileContent>
+              </GenericTile>
+              <GenericTile header="Kritisch" subheader="Risiko" frameType="TwoByOne" class="smartTile" press=".onDashboardTilePress">
+                <customData>
+                  <core:CustomData key="target" value="inventory" />
+                  <core:CustomData key="status" value="critical" />
+                </customData>
+                <tileContent><TileContent><content><ObjectNumber number="{/metrics/critical}" /></content></TileContent></tileContent>
+              </GenericTile>
+              <GenericTile header="Nachbestellen" subheader="Beschaffung" frameType="TwoByOne" class="smartTile" press=".onDashboardTilePress">
+                <customData>
+                  <core:CustomData key="target" value="inventory" />
+                  <core:CustomData key="status" value="reorder" />
+                </customData>
+                <tileContent><TileContent><content><ObjectNumber number="{/metrics/reorder}" /></content></TileContent></tileContent>
+              </GenericTile>
+              <GenericTile header="Offene Bestellungen" subheader="Workflow" frameType="TwoByOne" class="smartTile" press=".onDashboardTilePress">
+                <customData><core:CustomData key="target" value="orders" /></customData>
+                <tileContent><TileContent><content><ObjectNumber number="{/metrics/openOrders}" /></content></TileContent></tileContent>
+              </GenericTile>
+              <GenericTile header="Meistverkauft" subheader="Controlling" frameType="TwoByOne" class="smartTile" press=".onDashboardTilePress">
+                <customData><core:CustomData key="target" value="product" /></customData>
+                <tileContent><TileContent><content><ObjectNumber number="{/metrics/topProduct}" /></content></TileContent></tileContent>
+              </GenericTile>
+            </FlexBox>
+          </content>
+        </Panel>
+        <Panel class="smartPanel" visible="{/hasProcurementQueue}">
+          <headerToolbar>
+            <Toolbar>
+              <VBox>
+                <Label text="Entscheidungsunterstützung" class="sectionEyebrow" />
+                <Title text="Beschaffungs-Prioritäten" level="H2" />
+              </VBox>
+              <ToolbarSpacer />
+              <Button text="Lager prüfen" icon="sap-icon://inspect" type="Emphasized" press=".onNavInventory" />
+            </Toolbar>
+          </headerToolbar>
+          <content>
+            <List items="{/procurementQueue}" class="priorityList">
+              <CustomListItem>
+                <HBox class="priorityItem" alignItems="Center" justifyContent="SpaceBetween" wrap="Wrap">
+                  <HBox alignItems="Center" class="priorityMain">
+                    <ObjectNumber number="{rank}" class="priorityRank" />
+                    <VBox>
+                      <ObjectIdentifier title="{name}" text="{id} - {category}" />
+                      <Text text="Bestand {stock} von mindestens {minStock}" />
+                    </VBox>
+                  </HBox>
+                  <VBox class="priorityMeta">
+                    <ObjectStatus text="{riskPriorityText}" state="{riskPriorityState}" />
+                    <Text text="{riskReasonText}" />
+                    <ObjectStatus text="{orderHint}" state="{orderState}" />
+                  </VBox>
+                </HBox>
+              </CustomListItem>
+            </List>
+          </content>
+        </Panel>
+      </VBox>
+    </content>
+  </Page>
+</mvc:View>

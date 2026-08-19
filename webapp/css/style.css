@@ -1,0 +1,232 @@
+.sapMShellGlobalOuterBackground,
+.sapMShellCentralBox {
+  background: #f5f6f7;
+}
+
+.smartTabs {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.heroPanel,
+.smartPanel {
+  margin: 1rem;
+  border-radius: 0.375rem;
+}
+
+.heroPanel .sapMPanelContent {
+  background: linear-gradient(135deg, #ffffff 0%, #eaf3fb 100%);
+}
+
+.heroText {
+  max-width: 44rem;
+  gap: 0.5rem;
+}
+
+.heroText .sapMTitle {
+  white-space: normal;
+}
+
+.decisionBox {
+  width: 22rem;
+  gap: 0.75rem;
+  padding: 1rem;
+  border: 1px solid #d8dfe6;
+  border-radius: 0.375rem;
+  background: #fff;
+}
+
+.sectionEyebrow {
+  color: #0a6ed1;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.smartTile {
+  margin: 0.5rem;
+}
+
+.filterBar {
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.filterField {
+  gap: 0.25rem;
+}
+
+.stockNumber {
+  min-width: 2.5rem;
+  text-align: center;
+}
+
+.orderList {
+  min-width: 22rem;
+  flex: 1;
+}
+
+.orderItem {
+  gap: 0.65rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid #d8dfe6;
+  border-radius: 0.375rem;
+  background: #fff;
+}
+
+.orderMeta {
+  gap: 0.5rem 1.5rem;
+}
+
+.orderButtons {
+  gap: 0.5rem;
+}
+
+.orderActions {
+  gap: 0.25rem;
+  align-items: flex-end;
+}
+
+.processPanel,
+.analysisPanel,
+.detailPanel {
+  min-width: 22rem;
+  flex: 1;
+  margin: 0.5rem;
+}
+
+.smartPage {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.detailStack {
+  gap: 0.75rem;
+}
+
+.processSteps {
+  gap: 1rem;
+}
+
+.processPanel .sapMPanelContent {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.chartItem {
+  width: 100%;
+  gap: 0.4rem;
+  padding: 0.5rem 0;
+}
+
+.analysisPanel .sapMObjStatus {
+  white-space: normal;
+}
+
+.chartPanel {
+  min-width: 30rem;
+}
+
+.editDialogContent {
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+}
+
+.editField {
+  gap: 0.25rem;
+}
+
+.priorityList .sapMListItems {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.priorityItem {
+  gap: 1rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid #d8dfe6;
+  border-radius: 0.375rem;
+  background: #fff;
+}
+
+.priorityMain {
+  gap: 0.85rem;
+}
+
+.priorityRank {
+  width: 2.25rem;
+  min-width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  background: #eef5fb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.priorityMeta {
+  gap: 0.25rem;
+  min-width: 12rem;
+  align-items: flex-end;
+}
+
+.systemList .sapMListItemBase {
+  width: 24rem;
+  margin: 0.5rem;
+  border: 1px solid #d8dfe6;
+  border-radius: 0.375rem;
+  background: #fff;
+}
+
+.systemPanel {
+  min-width: 28rem;
+  flex: 1;
+  margin: 0.5rem;
+}
+
+.mockExplorer {
+  gap: 1rem;
+}
+
+.mockControls {
+  width: 22rem;
+  gap: 0.75rem;
+}
+
+.mockResult {
+  flex: 1;
+  min-width: 28rem;
+  font-family: "72Mono", Consolas, monospace;
+}
+
+.codeLine {
+  padding: 0.35rem 0.5rem;
+  border-radius: 0.25rem;
+  background: #eef3f8;
+  font-family: "72Mono", Consolas, monospace;
+}
+
+@media (max-width: 760px) {
+  .decisionBox,
+  .orderList,
+  .processPanel,
+  .analysisPanel,
+  .chartPanel,
+  .detailPanel,
+  .systemPanel,
+  .mockControls,
+  .mockResult,
+  .priorityMeta,
+  .systemList .sapMListItemBase {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .priorityMeta {
+    align-items: flex-start;
+  }
+
+  .smartTile {
+    width: calc(100% - 1rem);
+  }
+}
