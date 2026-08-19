@@ -1,6 +1,10 @@
 # SmartStock
 
+[![Portfolio validieren](https://github.com/leonwwest/smartstock-portfolio/actions/workflows/validate.yml/badge.svg)](https://github.com/leonwwest/smartstock-portfolio/actions/workflows/validate.yml)
+
 SmartStock ist eine OpenUI5-Webanwendung zur Lagerüberwachung und Bestellunterstützung für ein kleines Unternehmen. Das Projekt verbindet einen operativen Bestellprozess mit Kennzahlen, Bestandswarnungen und einer managementorientierten Analysesicht.
+
+**[Live-Demo öffnen](https://leonwwest.github.io/smartstock-portfolio/)**
 
 ![SmartStock Dashboard](docs/screenshots/01_dashboard.png)
 
@@ -24,6 +28,18 @@ SmartStock ist eine OpenUI5-Webanwendung zur Lagerüberwachung und Bestellunters
 - Fiori-orientierte Navigation, Statusdarstellung und KPI-Kacheln
 - OData-v2-Mock mit `ProductSet`, `OrderSet` und `metadata.xml`
 - HTML5, CSS und JavaScript
+
+## Architektur
+
+```mermaid
+flowchart LR
+    UI["XML Views und Fiori-orientierte Controls"] --> C["OpenUI5 Controller"]
+    C --> M["JSONModel und Geschäftslogik"]
+    C --> O["OData-v2-Mock-Service"]
+    O --> P["ProductSet"]
+    O --> B["OrderSet"]
+    M --> S["Status, KPI und Bestellworkflow"]
+```
 
 ## Fachlicher Ablauf
 
@@ -55,6 +71,17 @@ Danach `http://localhost:5173` öffnen.
 ## Einordnung
 
 SmartStock entstand im Wintersemester 2025/26 als Hochschul-Gruppenprojekt im Modul „Programmierung von Informationssystemen“. Die in diesem Repository enthaltene Anwendung und ihr Quellcode wurden vollständig von mir implementiert. Weitere Gruppenmitglieder wirkten an Tests, Bericht und Präsentation mit.
+
+## Meine Implementierung
+
+Ich habe die technische Anwendung vollständig umgesetzt, insbesondere:
+
+- OpenUI5-MVC-Struktur mit Component, Manifest, XML Views und Controllern
+- Routing zwischen Dashboard, Lager, Bestellungen, Analyse und Produktdetail
+- Datenmodell, Statuslogik und OData-v2-nahen Mock-Service
+- Bearbeitung von Produkten sowie Bestell-, Wareneingangs- und Stornoprozesse
+- KPI-, Reichweiten-, Umsatz- und Beschaffungsrisiko-Berechnungen
+- Eingabevalidierung, CSV-Export und responsive Darstellung
 
 Dieser öffentliche Portfolio-Snapshot enthält ausschließlich die ausführbare Anwendung, synthetische Mock-Daten und ausgewählte Screenshots. Gemeinsame Abgabeunterlagen, Präsentationen, personenbezogene Daten und die private Projektgeschichte sind bewusst nicht enthalten.
 
